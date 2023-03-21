@@ -36,4 +36,18 @@ namespace gregSharp.Repositories;
             House house = _db.Query<House>(sql, new {id}).FirstOrDefault();
             return house;
         } 
+
+        internal House Create(House houseData)
+        {
+            string sql = @"
+            INSERT INTO houses
+            (title, floors, bedrooms, bathrooms, squareFt, price, description)
+            VALUES
+            (@title, @floors, @bedrooms, @bathrooms, @squareFt, @price, @description);
+            SELECT LAST_INSERT_ID();
+            ";
+            int id = _db.ExecuteScalar<int>(sql, houseData);
+            houseData.Id = id;
+            return houseData;
+        }
     }

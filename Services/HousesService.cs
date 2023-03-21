@@ -26,5 +26,11 @@ namespace gregSharp.Services
             if(house == null) throw new Exception($"No House At Id: {id}");
             return house;
         }
+
+        internal House Create(House houseData)
+        {
+            House house = _repo.Create(houseData);
+            return house;
+        }
     }
 }

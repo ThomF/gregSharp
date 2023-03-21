@@ -43,5 +43,19 @@ namespace gregSharp.Controllers
             return BadRequest(e.Message);
             }
         }
+
+        [HttpPost]
+        public ActionResult<House> Create([FromBody] House houseData)
+        {
+            try 
+            {
+            House house = housesService.Create(houseData);
+            return Ok(house);
+            }
+            catch (Exception e)
+            {
+            return BadRequest(e.Message);
+            }
+        }
     }
 }
