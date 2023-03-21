@@ -32,5 +32,13 @@ namespace gregSharp.Services
             House house = _repo.Create(houseData);
             return house;
         }
+
+        internal string Remove(int id)
+        {
+            House house = this.Find(id);
+            bool result = _repo.Remove(id);
+            if(!result) throw new Exception($"something horrible happened with {house.Title}");
+            return $"delorted {house.Title}";
+        }
     }
 }

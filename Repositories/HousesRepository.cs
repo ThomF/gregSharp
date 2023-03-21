@@ -50,4 +50,13 @@ namespace gregSharp.Repositories;
             houseData.Id = id;
             return houseData;
         }
+
+        internal bool Remove(int id)
+        {
+            string sql = @"
+            DELETE FROM houses WHERE id = @id;
+            ";
+            int rows = _db.Execute(sql, new {id});
+            return rows == 1;
+        }
     }

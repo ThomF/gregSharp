@@ -57,5 +57,19 @@ namespace gregSharp.Controllers
             return BadRequest(e.Message);
             }
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult<string> Remove(int id)
+        {
+            try 
+            {
+            string message = housesService.Remove(id);
+            return Ok(message);
+            }
+            catch (Exception e)
+            {
+            return BadRequest(e.Message);
+            }
+        }
     }
 }
