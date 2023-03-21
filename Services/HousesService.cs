@@ -19,5 +19,12 @@ namespace gregSharp.Services
             List<House> houses = _repo.FindAllHouses();
             return houses;
         }
+
+        internal House Find(int id)
+        {
+            House house = _repo.FindOne(id);
+            if(house == null) throw new Exception($"No House At Id: {id}");
+            return house;
+        }
     }
 }

@@ -29,5 +29,19 @@ namespace gregSharp.Controllers
             return BadRequest(e.Message);
             }
         }
+
+        [HttpGet("{id}")]
+        public ActionResult<House> Find(int id)
+        {
+            try 
+            {
+            House house = housesService.Find(id);
+            return Ok(house);
+            }
+            catch (Exception e)
+            {
+            return BadRequest(e.Message);
+            }
+        }
     }
 }

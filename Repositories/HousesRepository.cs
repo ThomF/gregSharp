@@ -24,4 +24,16 @@ namespace gregSharp.Repositories;
             List<House> houses = _db.Query<House>(sql).ToList();
             return houses;
         }
+
+        internal House FindOne(int id)
+        {
+            string sql = @"
+            SELECT 
+            *
+            FROM houses
+            WHERE id = @id;
+            ";
+            House house = _db.Query<House>(sql, new {id}).FirstOrDefault();
+            return house;
+        } 
     }
