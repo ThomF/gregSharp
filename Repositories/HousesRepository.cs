@@ -59,4 +59,23 @@ namespace gregSharp.Repositories;
             int rows = _db.Execute(sql, new {id});
             return rows == 1;
         }
+
+        internal int Updated(House update)
+        {
+            string sql = @"
+            UPDATE houses
+            SET
+            title = @title,
+            floors = @floors,
+            bedrooms = @bedrooms,
+            bathrooms = @bathrooms,
+            squareFt = @squareFt,
+            price = @price,
+            description = @description
+            WHERE id = @id;
+            ";
+            int rows = _db.Execute(sql, update);
+            return rows;
+
+        }
     }

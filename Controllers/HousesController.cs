@@ -71,5 +71,20 @@ namespace gregSharp.Controllers
             return BadRequest(e.Message);
             }
         }
+
+        [HttpPut("{id}")]
+        public ActionResult<House> Update(int id, [FromBody] House updateData)
+        {
+            try 
+            {
+            updateData.Id = id;
+            House house = housesService.Update(updateData);
+            return Ok(house);
+            }
+            catch (Exception e)
+            {
+            return BadRequest(e.Message);
+            }
+        }
     }
 }

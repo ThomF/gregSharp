@@ -40,5 +40,20 @@ namespace gregSharp.Services
             if(!result) throw new Exception($"something horrible happened with {house.Title}");
             return $"delorted {house.Title}";
         }
+        internal House Update(House updateData)
+        {
+            House original = this.Find(updateData.Id);
+            original.Title = updateData.Title != null ? updateData.Title : original.Title;
+            original.Floors = updateData.Floors != 0 ? updateData.Floors : original.Floors;
+            original.Bedrooms = updateData.Bedrooms != 0 ? updateData.Bedrooms : original.Bedrooms;
+            original.Bathrooms = updateData.Bathrooms != 0 ? updateData.Bathrooms : original.Bathrooms;
+            original.SquareFt = updateData.SquareFt != 0 ? updateData.SquareFt : original.SquareFt;
+            original.Price = updateData.Price != 0 ? updateData.Price : original.Price;
+            original.Description = updateData.Description != null ? updateData.Description : original.Description;
+            int rowsAffected = _repo.Updated(original);
+            if(rowsAffected == 0)throw new Exception($"couldnt modify the house at id {updateData.Id}");
+            if(rowsAffected > 1) throw new Exception($"something just broke, what did you do?? You made at least {rowsAffected} of houses. Check the DB NOW!!! OOPS!");
+            return original;
+        }
     }
 }
